@@ -6,7 +6,7 @@ RUN mvn clean package -DskipTests
 
 # Стадия 2: Запуск с Tomcat
 FROM tomcat:9.0-jre17
-COPY --from=builder /app/target/team_project-1.0-SNAPSHOT.war /usr/local/tomcat/webapps/ROOT.war
+COPY --from=builder /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
 
 # Удаляем дефолтный ROOT
 RUN rm -rf /usr/local/tomcat/webapps/ROOT
