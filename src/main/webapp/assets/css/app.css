@@ -1,0 +1,262 @@
+/* ================= Core tokens ================= */
+:root{
+  --bg:#fbf2e9;
+  --paper:#fff7f0;
+  --ink:#2b221b;
+  --muted:#6b5a4d;
+  --accent:#a76634;
+  --accent-2:#d9a571;
+  --btn-dark:#4b2e21;
+  --btn-dark-text:#fff;
+  --ring:rgba(75,46,33,.15);
+  --card-shadow:0 10px 24px rgba(75,46,33,.08);
+}
+html[data-theme="dark"]{
+  --bg:#15110f;
+  --paper:#1d1714;
+  --ink:#f5e9df;
+  --muted:#cdb9a9;
+  --accent:#d9a571;
+  --accent-2:#a76634;
+  --btn-dark:#fff1e4;
+  --btn-dark-text:#2b221b;
+  --ring:rgba(255,255,255,.12);
+  --card-shadow:0 10px 24px rgba(0,0,0,.35);
+}
+
+/* ================= Base ================= */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+  line-height:1.45;
+}
+
+/* ================= Hotbar ================= */
+.hotbar{
+  position:sticky; top:0; z-index:50;
+  backdrop-filter:blur(8px);
+  background:color-mix(in oklab,var(--bg) 80%, transparent);
+  border-bottom:1px solid color-mix(in oklab,var(--ink) 15%, transparent);
+}
+.hotbar__inner{
+  max-width:1100px; margin:0 auto; padding:12px 16px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.brand{display:flex; gap:10px; text-decoration:none; color:var(--ink); align-items:center}
+.brand__logo{font-size:18px}
+.brand__text{font-weight:700; letter-spacing:.2px}
+.nav{display:flex; gap:14px; align-items:center}
+.nav__link{padding:8px 10px; border-radius:10px; color:var(--ink); text-decoration:none}
+.nav__link:hover{background:color-mix(in oklab,var(--ink) 10%, transparent)}
+.toggle{border:1px solid color-mix(in oklab,var(--ink) 20%, transparent); background:var(--paper); color:var(--ink); border-radius:12px; padding:6px 10px; cursor:pointer}
+
+/* ================= Layout helpers ================= */
+.container{max-width:1100px; margin:0 auto; padding:24px 16px 80px}
+
+/* ================= Generic Card ================= */
+.card{
+  background:var(--paper);
+  border:1px solid color-mix(in oklab,var(--ink) 8%, transparent);
+  border-radius:22px;
+  box-shadow:var(--card-shadow);
+  overflow:hidden;                   /* görsel taşmalarını kes */
+}
+
+/* ================= Buttons ================= */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:10px 12px; border-radius:12px; border:1px solid transparent; cursor:pointer;
+  background:transparent; color:var(--ink);
+}
+.btn--primary{
+  background:var(--btn-dark); color:var(--btn-dark-text);
+  border-color:color-mix(in oklab,var(--btn-dark-text) 8%, transparent);
+}
+.btn--ghost{
+  background:transparent;
+  border-color:color-mix(in oklab,var(--ink) 18%, transparent);
+  color:var(--ink);
+}
+.btn--ghost:hover{background:color-mix(in oklab,var(--ink) 8%, transparent)}
+.btn--lg{padding:14px 18px; font-size:16px; font-weight:700; border-radius:14px}
+
+/* ================= Floating cart ================= */
+.fab{
+  position:fixed; right:20px; bottom:22px; z-index:60; width:58px; height:58px;
+  background:var(--accent); color:#fff; border-radius:999px; display:grid; place-items:center;
+  box-shadow:0 12px 24px var(--ring); text-decoration:none;
+}
+.fab:hover{filter:brightness(.95)}
+.fab__badge{
+  position:absolute; top:-6px; right:-6px;
+  background:#ff6b6b; color:#fff; font-size:12px; min-width:22px; height:22px; border-radius:999px;
+  display:grid; place-items:center; padding:0 6px; font-weight:700; border:2px solid var(--bg);
+}
+
+/* ================= Hero ================= */
+.hero{
+  border-bottom:1px solid color-mix(in oklab,var(--ink) 12%, transparent);
+  background:linear-gradient(180deg,var(--paper) 0%, color-mix(in oklab,var(--paper) 85%, var(--bg)) 100%)
+}
+.hero__inner{max-width:1100px; margin:0 auto; padding:48px 16px 28px; text-align:center}
+.hero__title{font-size:40px; font-weight:800; margin:0 0 12px}
+
+/* ========== Products grid & cards (homepage) ========== */
+.grid{
+  display:grid;
+  gap:22px;
+  grid-template-columns: repeat(3, 1fr);   /* 3 sütun sabit */
+}
+@media (max-width: 1024px){
+  .grid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px){
+  .grid{ grid-template-columns: 1fr; }
+}
+
+/* Kart içindeki görsel alanı */
+.card__media{
+  height: 240px;               /* görsel yüksekliğini sabitle */
+  background:#f3ebe3;
+  overflow:hidden;
+}
+.card__img{
+  width:100%;
+  height:100%;
+  object-fit:cover;            /* taşma/kesme ile şık kadraj */
+  display:block;
+}
+
+/* Kart gövdesi ve tipografi */
+.card__body{ padding:18px; }
+.card__title{ margin:0 0 6px; font-size:20px; font-weight:800; }
+.card__price{ margin:0 0 12px; color:var(--muted); font-weight:700; }
+.card__actions{
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+}
+
+/* ================= Cart (mevcut görünüm korunuyor) ================= */
+.cart-table-wrap{padding:10px}
+.cart-table{
+  width:100%; border-collapse:separate; border-spacing:0;
+  background:var(--paper); border-radius:18px; overflow:hidden;
+  border:1px solid color-mix(in oklab,var(--ink) 10%, transparent);
+}
+.cart-table thead th{
+  text-align:left; font-weight:800; padding:14px 16px; color:var(--ink);
+  background:color-mix(in oklab,var(--paper) 85%, var(--bg));
+  border-bottom:1px solid color-mix(in oklab,var(--ink) 10%, transparent);
+}
+.cart-table tbody td{padding:14px 16px; border-bottom:1px solid color-mix(in oklab,var(--ink) 8%, transparent)}
+.cart-table tbody tr:last-child td{border-bottom:none}
+.cart-td-price{text-align:right; font-weight:700; color:var(--ink)}
+.cart-summary{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px; flex-wrap:wrap}
+
+/* ================= Product Detail – MINI CARD ================= */
+/* ==== Product detail (text only card) ==== */
+.pd-card{
+  max-width: 760px;
+  margin: 0 auto;
+  background: var(--paper);
+  border: 1px solid color-mix(in oklab, var(--ink) 8%, transparent);
+  border-radius: 22px;
+  box-shadow: var(--card-shadow);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.pd-card__title{ margin:0; font-size:28px; font-weight:800; }
+.pd-card__desc{ margin:2px 0 10px; color:var(--muted); line-height:1.65; }
+.pd-card__bottom{
+  display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-top:4px;
+}
+.pd-card__left{ display:flex; gap:10px; flex-wrap:wrap; }
+.pd-card__right{ display:flex; align-items:center; gap:10px; }
+.pd-card__price{ font-size:64px; font-weight:900; letter-spacing:.2px; line-height:1; }
+@media (max-width: 640px){
+  .pd-card{ padding:18px; }
+  .pd-card__price{ font-size:22px; }
+}
+
+/* ===== Auth (Admin Login) ===== */
+.auth-page .container{ max-width: 520px; }
+.auth-card{
+  background: var(--paper);
+  border: 1px solid color-mix(in oklab, var(--ink) 8%, transparent);
+  border-radius: 22px;
+  box-shadow: var(--card-shadow);
+  padding: 22px;
+}
+.auth-form{ display: grid; gap: 14px; }
+.form-row{ display: grid; gap: 8px; }
+.form-row label{ font-weight: 700; color: var(--ink); }
+.form-row input{
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in oklab, var(--ink) 18%, transparent);
+  background: var(--paper);
+  color: var(--ink);
+  outline: none;
+}
+.form-row input:focus{
+  box-shadow: 0 0 0 4px var(--ring);
+  border-color: color-mix(in oklab, var(--ink) 35%, transparent);
+}
+.form-actions{ display:flex; gap:10px; align-items:center; justify-content:space-between; }
+.btn--full{ min-width: 140px; }
+.form-error{ margin:0; color:#c0392b; font-weight:700; }
+.auth-hint{ margin:12px 0 0; color:var(--muted); font-size:14px; }
+
+/* ===== Products grid (home) ===== */
+.products-frame{
+  background: var(--paper);
+  border: 1px solid color-mix(in oklab, var(--ink) 12%, transparent);
+  border-radius: 22px;
+  box-shadow: var(--card-shadow);
+  padding: 20px;
+}
+.products-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+.products-grid .card{
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid color-mix(in oklab, var(--ink) 8%, transparent);
+  background: var(--paper);
+  box-shadow: var(--card-shadow);
+}
+.products-grid .card__media{
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  background: #f3ebe3;
+}
+.products-grid .card__img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.products-grid .card__body{ padding: 14px 16px 18px; }
+.products-grid .card__title{ margin: 0 0 6px; font-weight: 800; }
+.products-grid .card__price{ margin: 0 0 10px; color: var(--muted); font-weight: 700; }
+.products-grid .card__actions{ display: flex; gap: 10px; flex-wrap: wrap; }
+
+@media (max-width: 1024px){
+  .products-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px){
+  .products-grid{ grid-template-columns: 1fr; }
+  .products-grid .card__media{ height: 200px; }
+}
